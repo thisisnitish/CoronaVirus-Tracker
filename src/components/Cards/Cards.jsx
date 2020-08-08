@@ -1,64 +1,39 @@
 import React from 'react';
-import { Card, CardContent, Typography, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import styles from './Cards.module.css';
-import CountUp from 'react-countup';
-import cx from 'classnames';
+import CardComponent from './Card/Card';
 
-const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
+const Info = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
     if(!confirmed){
         return 'Loading...'
     }
     return(
         <div className={styles.container}>
             <Grid container spacing={3} justify="center">
-                <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.infected)}>
-                    <CardContent>
-                        <Typography color="textSecondary" gutterBottom>Infected</Typography>
-                        <Typography variant="h5">
-                            <CountUp
-                                start={0}
-                                end={confirmed.value}
-                                duration={2.5}
-                                separator=","
-                            />
-                        </Typography>
-                        <Typography color="textSecondary">{new Date(lastUpdate).toDateString()}</Typography>
-                        <Typography variant="body2">Number of Active Cases of COVID</Typography>
-                    </CardContent>
-                </Grid>
-                <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.recovered)}>
-                    <CardContent>
-                        <Typography color="textSecondary" gutterBottom>Recovered</Typography>
-                        <Typography variant="h5">
-                            <CountUp
-                                start={0}
-                                end={recovered.value}
-                                duration={2.5}
-                                separator=","
-                            />
-                        </Typography>
-                        <Typography color="textSecondary">{new Date(lastUpdate).toDateString()}</Typography>
-                        <Typography variant="body2">Number of Recoveries from COVID</Typography>
-                    </CardContent>
-                </Grid>
-                <Grid item component={Card} xs={12} md={3} className={cx(styles.card, styles.deaths)}>
-                    <CardContent>
-                        <Typography color="textSecondary" gutterBottom>Deaths</Typography>
-                        <Typography variant="h5">
-                            <CountUp
-                                start={0}
-                                end={deaths.value}
-                                duration={2.5}
-                                separator=","
-                            />
-                        </Typography>
-                        <Typography color="textSecondary">{new Date(lastUpdate).toDateString()}</Typography>
-                        <Typography variant="body2">Number of Deaths from COVID</Typography>
-                    </CardContent>
-                </Grid>
+                <CardComponent
+                    className={styles.infected}
+                    cardTitle="Infected"
+                    value={confirmed.value}
+                    lastUpdate={lastUpdate}
+                    cardSubtitle="Number of Active Cases from COVID"
+                />
+                <CardComponent
+                    className={styles.recovered}
+                    cardTitle="Recovered"
+                    value={recovered.value}
+                    lastUpdate={lastUpdate}
+                    cardSubtitle="Number of Recovered Cases from COVID"
+                />
+                <CardComponent
+                    className={styles.deaths}
+                    cardTitle="Deaths"
+                    value={deaths.value}
+                    lastUpdate={lastUpdate}
+                    cardSubtitle="Number of Deaths Caused by COVID"
+                />
             </Grid>
         </div>
-    )
-}
+    );
+};
 
-export default Cards;
+export default Info;
