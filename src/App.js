@@ -1,11 +1,13 @@
 import React from 'react';
 import { Cards, Chart, CountryPicker } from './components';
-import Styles from './App.module.css';
+import styles from './App.module.css';
 import { fetchData } from './api';
+import coronaImage from './images/image.png';
 
 class App extends React.Component{
     state = {
-      data: {},  
+      data: {},
+      country: '',  
     }
 
     //we are making componentDidMount an async function so that it can fetch the data from the api which is already an async function
@@ -14,12 +16,19 @@ class App extends React.Component{
         this.setState({ data: fetchedData });
     }
 
+    handleCountryChange = async (country) => {
+        const fetchedData = await fetchData(country);
+
+        this.setState({ data: fetchedData, country: country });
+    }
+
     render(){
         return(
-            <div className={Styles.container}>
+            <div className={styles.container}>
+                <img className={styles.image} src={coronaImage} alt="COVID"/>
                 <Cards data={this.state.data}/>
-                <CountryPicker/>
-                <Chart/>
+                <CountryPicker handleCountryChange={this.handleCountryChange}/>
+                <Chart data={this.state.data} country={this.state.country}/>
             </div>
         );
     }
