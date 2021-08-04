@@ -1,5 +1,10 @@
 .card{
     margin: 0 2% !important;
+    transition: transform .4s; 
+}
+
+.card:hover{
+    transform: scale(1.2);
 }
 
 @media only screen and (max-width: 770px){

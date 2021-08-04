@@ -1,9 +1,9 @@
 import React from 'react';
 import { Cards, Chart, CountryPicker } from './components';
+import { Typography } from "@material-ui/core";
 import styles from './App.module.css';
 import { fetchData } from './api';
-import coronaImage from './images/image.png';
-import Footer from './footer/footer';
+import coronaImage from './images/image.jpeg';
 
 class App extends React.Component{
     state = {
@@ -27,11 +27,10 @@ class App extends React.Component{
         return(
             <div className={styles.container}>
                 <img className={styles.image} src={coronaImage} alt="COVID"/>
-                <h1>STATISTICS</h1>
+                <Typography variant="h2" style={{fontWeight: "bold", color: "red"}}>STATISTICS</Typography>
                 <Cards data={this.state.data}/>
                 <CountryPicker handleCountryChange={this.handleCountryChange}/>
                 <Chart data={this.state.data} country={this.state.country}/>
-                <Footer/>
             </div>
         );
     }

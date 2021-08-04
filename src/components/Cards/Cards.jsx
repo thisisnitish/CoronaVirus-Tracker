@@ -16,21 +16,21 @@ const Info = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
                     cardTitle="Infected"
                     value={confirmed.value}
                     lastUpdate={lastUpdate}
-                    cardSubtitle="Number of Active Cases from COVID"
+                    cardSubtitle="Active Cases from COVID around the world"
                 />
                 <CardComponent
                     className={styles.recovered}
                     cardTitle="Recovered"
                     value={recovered.value}
                     lastUpdate={lastUpdate}
-                    cardSubtitle="Number of Recovered Cases from COVID"
+                    cardSubtitle="Recovered Cases from COVID around the world"
                 />
                 <CardComponent
                     className={styles.deaths}
                     cardTitle="Deaths"
                     value={deaths.value}
                     lastUpdate={lastUpdate}
-                    cardSubtitle="Number of Deaths Caused by COVID"
+                    cardSubtitle="Deaths Caused by COVID around the world"
                 />
             </Grid>
         </div>
